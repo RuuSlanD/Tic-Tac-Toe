@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 26px;
+    color: black;
+    /* $backCol: rgb(19, 54, 254);
+    $contCol: rgb(131, 113, 235);
+    $barCol: rgb(19, 53, 221);
+    $crossCol: red;
+    $nullCol: red; */
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.container{
+    width: 100vw;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    color: red;
+}
+
+.heading{
+    margin-top: 0;
+    height: 100px;
+    background-color: blue;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+#heading{
+    margin-top: 40px;
+    color: #fff;
+}
+
+.game{
+    margin: 0;
+    margin-top: 0;
+}
+
+/* .grid__wrapper{
+    width: ;
+    height: ;
+    background-color: rgb(38, 38, 180);
+} */
+
+.grid{
+    /* margin-top: 20px; */
+    padding-top: 20px;
+    width: 380px;
+    height: 380px;
+    background-color: rgb(27, 27, 134);
+}
+
+.grid__line{
+    display: flex;
+    justify-content: center;
+    /* background-color: ; */
+    flex-wrap: wrap;
+}
+.grid__element{
+    /* margin-top: 100px; */
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(152, 152, 233);
+    transition: 0.5s;
+    cursor:pointer;
+}
+/* .grid__element:hover{
+    transition: 0.5s;
+    background-color: rgb(126, 126, 228);
+} */
+
+.event-none{
+    pointer-events: none;
+}
+
+.end{
+    margin-right: 0;
+}
+
+.cross{
+    background-color: red;
+}
+.red{
+    background-color: red; 
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.white{
+    background-color: white; 
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
