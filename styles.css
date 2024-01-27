@@ -77,6 +77,18 @@
     pointer-events: none;
 }
 
+.winner{
+    pointer-events: none;
+    background-color: rgb(255, 234, 0);
+    transition: 1s;
+}
+
+.losser{
+    pointer-events: none;
+    background-color: rgb(94, 101, 177);
+    transition: 1s;
+}
+
 .end{
     margin-right: 0;
 }
