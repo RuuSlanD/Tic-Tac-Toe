@@ -1,6 +1,15 @@
 const elements = document.querySelector('.grid__line'); 
+const container = document.querySelector('.container'); 
+const heading = document.querySelector('.heading')
 const box = document.querySelectorAll('.grid__element'); 
-let heading = document.getElementById('red_score');
+let scoreNull1 = document.querySelector('score-red-z');
+let scoreNull2 = document.querySelector('score-white-z');
+const h1 = document.querySelector('h1');
+
+const audio = document.getElementById('audio');
+elements.addEventListener('click', audioPlay, false);
+
+
 
 let red; let white;
 let win;
@@ -13,6 +22,7 @@ let animatedScoreRed;
 let animatedScoreWhite;
  
 elements.addEventListener('click', function(event){ 
+    
     if (event.target.classList.contains('grid__element')){ 
         console.log('Flag: ', flag); 
         if( flag % 2 == 1){ 
@@ -39,7 +49,9 @@ elements.addEventListener('click', function(event){
 
 }); 
  
- ``
+function audioPlay() {
+    audio.play();
+}
 function checkRow(){ 
     // console.log(arr); 
     console.log('FinishString'); 
@@ -68,7 +80,7 @@ function checkColumn(){
             if(arr[i][j] == arr[i+1][j] && arr[i][j] == arr[i+2][j]){   
                 console.log('Столбец одинаквый ПОБЕДА');
                 win = true;
-                whoWin();
+                animatedFinish();
             }
             else{
                 console.log('Столбец разный');
@@ -84,7 +96,7 @@ function checkDiagonals(){
             if(arr[i][j] == arr[i+1][j+1] && arr[i][j] == arr[i+2][j+2]){
                 console.log('Левая диагональ равна ПОБЕДА');
                 win = true;
-                whoWin();
+                animatedFinish();
             }
             else{
                 console.log('Левая диагональ не равна');
@@ -96,7 +108,7 @@ function checkDiagonals(){
             if(arr[i][j] == arr[i+1][j-1] && arr[i][j] == arr[i+2][j-2]){
                 console.log('Правая диагональ равна ПОБЕДА');
                 win = true;
-                whoWin();
+                animatedFinish();
             }
             else{
                 console.log('Правая диагональ не равна');
@@ -125,20 +137,34 @@ function animatedFinish(){
 };
 
 function score(){
-
 };
 
 function redHTML(){
     red = true;
     scoreRed++;
-    heading.insertAdjacentHTML('beforeEnd', '');
-    animatedScoreRed = `<h1 id="score-red">${scoreRed}</h1>`;
-    heading.insertAdjacentHTML('afterBegin', animatedScoreRed);
-}
+    const hRed = heading.firstChild;
+    console.log('УДАЛИТЬ');
+    hRed.remove();
+    scoreNull1.classList.add('none');
+
+    animatedScoreRed = `<h1 class="score-red">${scoreRed}</h1>`;
+    container.insertAdjacentHTML('afterBegin', animatedScoreRed);
+};
+
 function whiteHTML(){
     white = true;
     scoreWhite++;
-    const clear = '';
-    animatedScoreWhite = `<h1 id="score-white">${scoreWhite}</h1>`;
-    heading.insertAdjacentHTML('beforeEnd', animatedScoreWhite);
-}
+    const hWhite = heading.lastChild;
+    console.log('УДАЛИТЬ');
+    hWhite.remove();
+    // scoreNull2.classList.add('none');
+
+    animatedScoreWhite = `<h1 class="score-white">${scoreWhite}</h1>`;
+    container.insertAdjacentHTML('beforeEnd', animatedScoreWhite);
+};
+
+
+  
+
+
+
