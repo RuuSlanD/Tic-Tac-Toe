@@ -2,13 +2,11 @@ const elements = document.querySelector('.grid__line');
 const container = document.querySelector('.container'); 
 const heading = document.querySelector('.heading')
 const box = document.querySelectorAll('.grid__element'); 
-let scoreNull1 = document.querySelector('score-red-z');
-let scoreNull2 = document.querySelector('score-white-z');
+let scoreNull1 = document.querySelector('.score-red-z');
+let scoreNull2 = document.querySelector('.score-white-z');
 const h1 = document.querySelector('h1');
 
 const audio = document.getElementById('audio');
-elements.addEventListener('click', audioPlay, false);
-
 
 
 let red; let white;
@@ -24,6 +22,7 @@ let animatedScoreWhite;
 elements.addEventListener('click', function(event){ 
     
     if (event.target.classList.contains('grid__element')){ 
+        audio.play();
         console.log('Flag: ', flag); 
         if( flag % 2 == 1){ 
             event.target.classList.add('red'); 
@@ -44,14 +43,10 @@ elements.addEventListener('click', function(event){
         checkRow(); 
         checkColumn();
         checkDiagonals();
-        animatedFinish();
     }; 
 
 }); 
- 
-function audioPlay() {
-    audio.play();
-}
+
 function checkRow(){ 
     // console.log(arr); 
     console.log('FinishString'); 
@@ -60,7 +55,10 @@ function checkRow(){
             if(arr[i][j] == arr[i][j+1] && arr[i][j] == arr[i][j+2]){
                 console.log('Строка равна ПОБЕДА');
                 win = true;
+                animatedFinish();
+                // score();
                 if (arr[i][j] == 1){
+                    console.log('REEEEEEEEEEEEEEEED');
                     redHTML();
                 }else{
                    whiteHTML();
@@ -73,7 +71,7 @@ function checkRow(){
         }; 
     }; 
     // if(rowCount == 3 ){losRow = rowCount};
-}
+};
 function checkColumn(){
     for(let j = 0; j < 3; j++){ 
         for (let i = 0; i < 1; i++){ 
@@ -81,6 +79,13 @@ function checkColumn(){
                 console.log('Столбец одинаквый ПОБЕДА');
                 win = true;
                 animatedFinish();
+
+                console.log('FIRE', arr[i][j]);
+                if (arr[i][j] == 1){
+                    redHTML();
+                }else{
+                   whiteHTML();
+                };
             }
             else{
                 console.log('Столбец разный');
@@ -97,6 +102,11 @@ function checkDiagonals(){
                 console.log('Левая диагональ равна ПОБЕДА');
                 win = true;
                 animatedFinish();
+                if (arr[i][j] == 1){
+                    redHTML();
+                }else{
+                   whiteHTML();
+                };
             }
             else{
                 console.log('Левая диагональ не равна');
@@ -109,6 +119,7 @@ function checkDiagonals(){
                 console.log('Правая диагональ равна ПОБЕДА');
                 win = true;
                 animatedFinish();
+                score();
             }
             else{
                 console.log('Правая диагональ не равна');
@@ -126,41 +137,26 @@ function animatedFinish(){
             item.classList.remove('red', 'white');
             item.classList.add("winner");
         };
-    }
-    // else
-    // if(losLeftCount == losRightCount){
-    //     for(let item of box) {
-    //         item.classList.remove('red', 'white');
-    //         item.classList.add("losser");
-    //     };
-    // };
+    };
 };
 
-function score(){
-};
+// function score(){
+//     if (arr[i][j] == 1){
+//         redHTML();
+//     }else{
+//        whiteHTML();
+//     };
+// };
 
 function redHTML(){
     red = true;
-    scoreRed++;
-    const hRed = heading.firstChild;
-    console.log('УДАЛИТЬ');
-    hRed.remove();
-    scoreNull1.classList.add('none');
-
-    animatedScoreRed = `<h1 class="score-red">${scoreRed}</h1>`;
-    container.insertAdjacentHTML('afterBegin', animatedScoreRed);
+    scoreNull1 = scoreNull1.insertAdjacentElement('afterBegin', `${scoreRed++}`);
+    // scoreNull1.textContent = scoreRed++;
 };
 
 function whiteHTML(){
     white = true;
-    scoreWhite++;
-    const hWhite = heading.lastChild;
-    console.log('УДАЛИТЬ');
-    hWhite.remove();
-    // scoreNull2.classList.add('none');
-
-    animatedScoreWhite = `<h1 class="score-white">${scoreWhite}</h1>`;
-    container.insertAdjacentHTML('beforeEnd', animatedScoreWhite);
+    scoreNull2.textContent = scoreWhite++;
 };
 
 

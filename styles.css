@@ -29,6 +29,10 @@
     border-bottom: 1px solid rgb(255, 255, 255);
 }
 
+.none{
+    display: none;
+}
+
 .score-red-z{
     position: absolute;
     color: white;
