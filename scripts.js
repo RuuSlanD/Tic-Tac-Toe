@@ -44,25 +44,19 @@ elements.addEventListener('click', function(event){
         checkColumn();
         checkDiagonals();
     }; 
-
+    if(win == true){
+        setTimeout(()=>{nextRound();}, 500);
+    }
 }); 
 
 function checkRow(){ 
-    // console.log(arr); 
-    console.log('FinishString'); 
     for(let i = 0; i < 3; i++){ 
         for (let j = 0; j < 1; j++){ 
             if(arr[i][j] == arr[i][j+1] && arr[i][j] == arr[i][j+2]){
                 console.log('Строка равна ПОБЕДА');
                 win = true;
-                animatedFinish();
-                // score();
-                if (arr[i][j] == 1){
-                    console.log('REEEEEEEEEEEEEEEED');
-                    redHTML();
-                }else{
-                   whiteHTML();
-                };
+                animatedFinish(i, j);
+                score(i, j);
             }
             else{
                 console.log('Строка разная');
@@ -70,7 +64,6 @@ function checkRow(){
             };
         }; 
     }; 
-    // if(rowCount == 3 ){losRow = rowCount};
 };
 function checkColumn(){
     for(let j = 0; j < 3; j++){ 
@@ -81,11 +74,7 @@ function checkColumn(){
                 animatedFinish();
 
                 console.log('FIRE', arr[i][j]);
-                if (arr[i][j] == 1){
-                    redHTML();
-                }else{
-                   whiteHTML();
-                };
+                score(i, j);
             }
             else{
                 console.log('Столбец разный');
@@ -102,11 +91,7 @@ function checkDiagonals(){
                 console.log('Левая диагональ равна ПОБЕДА');
                 win = true;
                 animatedFinish();
-                if (arr[i][j] == 1){
-                    redHTML();
-                }else{
-                   whiteHTML();
-                };
+                score(i, j);
             }
             else{
                 console.log('Левая диагональ не равна');
@@ -119,7 +104,7 @@ function checkDiagonals(){
                 console.log('Правая диагональ равна ПОБЕДА');
                 win = true;
                 animatedFinish();
-                score();
+                score(i, j);
             }
             else{
                 console.log('Правая диагональ не равна');
@@ -131,35 +116,45 @@ function checkDiagonals(){
     // if(rdCount == 1 ){losRightCount = rdCount};
 };
 
-function animatedFinish(){
+function animatedFinish(a, b){
     if(win == true){
         for(let item of box) {
             item.classList.remove('red', 'white');
             item.classList.add("winner");
         };
+        // Анимация на число
+        // if (arr[a][b] == 1){
+        //     scoreNull1.classList.add('blick');
+        // }
     };
 };
 
-// function score(){
-//     if (arr[i][j] == 1){
-//         redHTML();
-//     }else{
-//        whiteHTML();
-//     };
-// };
+function score(a, b){
+    if (arr[a][b] == 1){
+        return redHTML();
+    }else{
+       return whiteHTML();
+    };
+};
 
 function redHTML(){
     red = true;
-    scoreNull1 = scoreNull1.insertAdjacentElement('afterBegin', `${scoreRed++}`);
-    // scoreNull1.textContent = scoreRed++;
+    return scoreNull1.textContent = ++scoreRed;
 };
-
 function whiteHTML(){
     white = true;
-    scoreNull2.textContent = scoreWhite++;
+    return scoreNull2.textContent = ++scoreWhite;
 };
 
-
+function nextRound(){
+    arr = [[4,3,0],[0,7,5],[0,3,0]]; 
+    win = false;
+    flag = 1;
+    for(let item of box) {
+            item.classList.remove("winner");
+            item.classList.remove('event-none'); 
+        };
+};
   
 
 
